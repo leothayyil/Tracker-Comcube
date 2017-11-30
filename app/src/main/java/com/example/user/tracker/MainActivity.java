@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        pb = (ProgressBar) findViewById(R.id.progressBar1);
-        pb.setVisibility(View.INVISIBLE);
+//        pb = (ProgressBar) findViewById(R.id.progressBar1);
+//        pb.setVisibility(View.INVISIBLE);
 
         editLocation = (TextView) findViewById(R.id.editTextLocation);
 
@@ -133,8 +133,8 @@ public class MainActivity extends AppCompatActivity
                             buffer.append("SHOP :"+ res.getString(1)+"\n");
                             buffer.append("IN_TIME :"+ res.getString(2)+"\n");
                             buffer.append("IN_LOCATION :"+ res.getString(3)+"\n");
-                            buffer.append("OUT_TIME :"+ res.getString(3)+"\n");
-                            buffer.append("OUT_LOCATION :"+ res.getString(3)+"\n\n");
+                            buffer.append("OUT_TIME :"+ res.getString(4)+"\n");
+                            buffer.append("OUT_LOCATION :"+ res.getString(5)+"\n\n");
 
                             shpDB = buffer.append("SHOP :" + res.getString(1) + "\n");
                         }
