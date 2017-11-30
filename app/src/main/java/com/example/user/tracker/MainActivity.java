@@ -54,15 +54,17 @@ public class MainActivity extends AppCompatActivity
 
     String inTime = "";
     String inLocation;
-    String outTime = "";
-    String outLocation = "";
+    String outTime = "You are in";
+    String outLocation = "You are in";
     StringBuffer shpDB;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         myDb = new DatabaseHelper(this);
         btnIn = (Button) findViewById(R.id.btnIn);
@@ -70,9 +72,12 @@ public class MainActivity extends AppCompatActivity
         shopName = (EditText) findViewById(R.id.shopName);
         btnVisited = (Button) findViewById(R.id.btnView);
         inTime = DateFormat.getDateTimeInstance().format(new Date());
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
             return;
         }
@@ -139,6 +144,9 @@ public class MainActivity extends AppCompatActivity
                             shpDB = buffer.append("SHOP :" + res.getString(1) + "\n");
                         }
 
+                        Intent i=new Intent(MainActivity.this,VisitedActivity.class);
+                        startActivity(i);
+
                         Toast.makeText(MainActivity.this, buffer.toString()+inLocation, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -159,13 +167,13 @@ public class MainActivity extends AppCompatActivity
                             if(isInserted == true){
 
                                 Toast.makeText(MainActivity.this,"Data Inserted",Toast.LENGTH_LONG).show();
-                                shopName.setVisibility(View.GONE);
+
                             }
 
                             else
                                 Toast.makeText(MainActivity.this,"Data not Inserted",Toast.LENGTH_LONG).show();
                         }
-                        Toast.makeText(MainActivity.this, "Please the fields", Toast.LENGTH_SHORT).show();
+
                         
                     }
     }
@@ -177,7 +185,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-                boolean isUpdate=myDb.updateData(null,inTime,inLocation);
+                boolean isUpdate=myDb.updateData(id,inTime,inLocation);
 
                 if (isUpdate==true)
                     Toast.makeText(MainActivity.this, "You are Out", Toast.LENGTH_SHORT).show();

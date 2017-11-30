@@ -83,7 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //    }
 
 
-    public boolean updateData(String id,String outTime, String outLocation) {
+    public boolean updateData(int id, String outTime, String outLocation) {
 
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues contentValues=new ContentValues();
